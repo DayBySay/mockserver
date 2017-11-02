@@ -41,7 +41,10 @@ func registerEndpoints(mux *http.ServeMux, endpointInfos []EndpointInfo) {
 			w.Header().Set("Content-Type", http.DetectContentType(data))
 			fmt.Fprintf(w, string(data))
 		})
-	}
+        mux.HandleFunc("/sdk/i/rv/",func(w http.ResponseWriter, r *http.Request) {
+            w.WriteHeader(http.StatusInternalServerError)
+        })
+    }
 }
 
 func makeEndpointInfos(dirPath string) []EndpointInfo {
